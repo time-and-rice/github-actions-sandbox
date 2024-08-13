@@ -4,10 +4,11 @@ on:
   pull_request:
     types:
       - opened
+      - reopened
 
 jobs:
   Comment:
-    if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
+    if: github.head_ref != 'main' && github.head_ref != 'develop'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
