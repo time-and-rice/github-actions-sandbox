@@ -1,0 +1,20 @@
+name: Comment on PR Opened
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  Comment:
+    if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment on PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Thanks for opening this PR!
